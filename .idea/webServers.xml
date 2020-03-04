@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5b2dd673-52f0-40e4-b9cb-5aae86565554" name="matagalls.salle.url.edu" url="http://matagalls.salle.url.edu">
+        <fileTransfer host="matagalls.salle.url.edu" port="22" rootFolder="/users/home/alumnes/LS/cristianalex.lopez" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
