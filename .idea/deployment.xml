@@ -2,6 +2,16 @@
 <project version="4">
   <component name="PublishConfigData" serverName="matagalls.salle.url.edu">
     <serverData>
+      <paths name="Remote Host Matagalls (2034f47c-4486-46c3-a608-3af32d8e9249)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.Nt9o8WFTWh" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
       <paths name="matagalls.salle.url.edu">
         <serverdata>
           <mappings>
