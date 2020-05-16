@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="matagalls.salle.url.edu" id="24522ecc-1687-4037-8c0e-9394afb92abe" port="22" customName="matagalls.salle.url.edu" nameFormat="CUSTOM" username="cristianalex.lopez" />
+    </configs>
+  </component>
+</project>

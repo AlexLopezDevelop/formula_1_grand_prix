@@ -7,7 +7,7 @@ set(ALLEGRO_DIR "/usr/local/Cellar/allegro/5.2.6.0")
 include_directories(${ALLEGRO_DIR}/include)
 link_directories(${ALLEGRO_DIR}/lib)
 
-add_executable(f1 main.c LS_allegro.c LS_allegro.h)
+add_executable(f1 main.c LS_allegro.c LS_allegro.h file/file.c file/file.h interface/interface.c interface/interface.h)
 
 file(GLOB LIBRARIES ${ALLEGRO_DIR}/lib/*.dylib)
 message("LIBRARIES = ${LIBRARIES}")
