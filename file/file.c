@@ -3,7 +3,7 @@
 //
 #include "file.h"
 
-int check_file(char filename[MAX_CHAR], int itsBin) {
+int checkFile(char *filename[], int itsBin) {
     FILE * file;
 
     // Check can open
@@ -17,7 +17,7 @@ int check_file(char filename[MAX_CHAR], int itsBin) {
         return 1;
     }
 
-    // Check no void file
+    // Check empty file
     int size = 0;
     if(file!=NULL) {
         fseek (file, 0, SEEK_END);
@@ -39,7 +39,7 @@ void read_txt(char filename[MAX_CHAR]) {
     FILE *file = NULL;
     char line[MAX_CHAR];
 
-    if (check_file(filename, false)) {
+    if (checkFile(filename, false)) {
         printf("\nError al abrir el fichero: %s\n", filename);
     } else {
 

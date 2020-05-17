@@ -10,6 +10,6 @@
 #include <stdbool.h>
 
 void read_txt(char filename[MAX_CHAR]);
-int check_file(char filename[MAX_CHAR], int itsBin);
+int checkFile(char *filename[], int itsBin);
 
 #endif //F1_FILE_H

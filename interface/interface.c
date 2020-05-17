@@ -4,23 +4,69 @@
 
 #include "interface.h"
 
-int menu_interface() {
+void show_main_menu() {
+    printf("\n");
+    printf("     1. Configurar coche\n");
+    printf("     2. Carrera\n");
+    printf("     3. Ver clasificatoria\n");
+    printf("     4. Guardar temporada\n");
+    printf("\nQue opcion quieres ejecutar? ");
+}
 
-    int exit = 0;
+int read_option(int * option) {
 
-    while (!exit) {
+    fflush(stdin);
 
-        if(LS_allegro_key_pressed(ALLEGRO_KEY_ESCAPE)){
-            exit = 1;
+    // Get user option
+    char userInput[MAX_CHAR];
+    scanf("%s", &userInput);
+
+    // check exit case
+    if (strcmp(userInput, "exit") == 0) {
+        *option = -1;
+        return 1;
+
+    } else { // check if its number
+        // TODO: Loop for more digits, HARDCODED for just one
+        if (strlen(userInput) == 1) {
+            if (isdigit(userInput[0])) {
+                *option = atoi(userInput);
+                return 1;
+            }
         }
-
-        //Draw screen
-        LS_allegro_clear_and_paint(BLACK);
-
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,100,0,"%s","Bienvenidos a LS Racing!");
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,150,0,"%s","1. Configurar coche");
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,170,0,"%s","2. Carrera");
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,190,0,"%s","3. Ver clasificacion");
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,210,0,"%s","4. Guardar temporada");
     }
+
+    printf("\nError. Opcion no valida.\n");
+    return 0;
+}
+
+int switch_option(int * option) {
+
+    switch (*option) {
+
+        case MENU_OPTION_EXIT:
+            printf("\nHasta pronto!\n");
+            return 1;
+
+        case MENU_OPTION_1:
+            //configure_car();
+            return 0;
+
+        case MENU_OPTION_2:
+
+            return 0;
+
+        case MENU_OPTION_3:
+
+            return 0;
+
+        case MENU_OPTION_4:
+
+            return 0;
+
+        default:
+            printf("\nError. Opcion no valida.\n");
+            return 0;
+    }
+
 }
