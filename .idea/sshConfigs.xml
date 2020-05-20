@@ -3,6 +3,7 @@
   <component name="SshConfigs">
     <configs>
       <sshConfig authType="PASSWORD" host="matagalls.salle.url.edu" id="24522ecc-1687-4037-8c0e-9394afb92abe" port="22" customName="matagalls.salle.url.edu" nameFormat="CUSTOM" username="cristianalex.lopez" />
+      <sshConfig authType="PASSWORD" host="matagalls.salle.url.edu" id="07e6301e-d21f-4c0c-bab5-0b0605be8f99" port="22" customName="matagalls.salle.url.edu" nameFormat="CUSTOM" username="cristianalex.lopez" />
     </configs>
   </component>
 </project>

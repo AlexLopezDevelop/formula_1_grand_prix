@@ -10,17 +10,19 @@
 #define MENU_OPTION_2 2
 #define MENU_OPTION_3 3
 #define MENU_OPTION_4 4
-#define MAX_CHAR 50
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
+#include "../game.h"
+#include "../models/racer.h"
 #include "../configuration/configuration.h"
 
-void show_main_menu();
-int read_option(int * option);
-int switch_option(int * option);
+void showMainMenu();
+int readOption(int * option);
+int switchOption(int * option);
+void pilotData();
 
 #endif //F1_INTERFACE_H

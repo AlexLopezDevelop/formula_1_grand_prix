@@ -4,7 +4,7 @@
 
 #include "interface.h"
 
-void show_main_menu() {
+void showMainMenu() {
     printf("\n");
     printf("     1. Configurar coche\n");
     printf("     2. Carrera\n");
@@ -13,13 +13,13 @@ void show_main_menu() {
     printf("\nQue opcion quieres ejecutar? ");
 }
 
-int read_option(int * option) {
+int readOption(int * option) {
 
     fflush(stdin);
 
     // Get user option
     char userInput[MAX_CHAR];
-    scanf("%s", &userInput);
+    scanf("%s", (char *) &userInput);
 
     // check exit case
     if (strcmp(userInput, "exit") == 0) {
@@ -40,7 +40,7 @@ int read_option(int * option) {
     return 0;
 }
 
-int switch_option(int * option) {
+int switchOption(int * option) {
 
     switch (*option) {
 
@@ -49,7 +49,7 @@ int switch_option(int * option) {
             return 1;
 
         case MENU_OPTION_1:
-            //configure_car();
+            configureCar();
             return 0;
 
         case MENU_OPTION_2:
@@ -68,5 +68,25 @@ int switch_option(int * option) {
             printf("\nError. Opcion no valida.\n");
             return 0;
     }
+}
+
+void pilotData() {
+
+    Racer racer;
+    char userInput[MAX_CHAR];
+    bool correctInput = false;
+
+    while (!correctInput) {
+        fflush(stdin);
+        printf("\nNombre del piloto? ");
+        scanf("%s", (char *) &userInput);
+        if (strlen(userInput) <= MAX_CHAR) {
+            strcpy(racer.name, userInput);
+            correctInput = true;
+        } else {
+            printf("\nError, el tamaño maximo es de 25 caracteres\n");
+        }
+    }
+
 
 }

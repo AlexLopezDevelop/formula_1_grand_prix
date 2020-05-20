@@ -8,9 +8,9 @@ int checkFile(char *filename[], int itsBin) {
 
     // Check can open
     if (itsBin) {
-        file = fopen(filename, "rb");
+        file = fopen(*filename, "rb");
     } else {
-        file = fopen(filename, "r");
+        file = fopen(*filename, "r");
     }
 
     if (file == NULL) {
@@ -35,18 +35,21 @@ int checkFile(char *filename[], int itsBin) {
     return 0;
 }
 
-void read_txt(char filename[MAX_CHAR]) {
+void loadRacers(char *fileName[]) {
     FILE *file = NULL;
     char line[MAX_CHAR];
 
-    if (checkFile(filename, false)) {
-        printf("\nError al abrir el fichero: %s\n", filename);
+    printf("\n%s\n", (char *) fileName);
+
+    if (checkFile(fileName, false)) {
+        printf("\nError al abrir el fichero: %s\n", (char *) fileName);
     } else {
 
-        file = fopen(filename, "r");
+        file = fopen(*fileName, "rb");
 
         while (!feof(file)) {
             fscanf(file, "%s", line);
+            printf("\n%s\n", line);
         }
 
         fclose(file);
