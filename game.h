@@ -13,6 +13,8 @@
 #include "LS_allegro.h"
 #include "./interface/interface.h"
 #include "./file/file.h"
+#include "./models/pieces.h"
+#include "models/gps.h"
 
 void startGame(int argc, char *argv[]);
 int checkArgs(int argc, char *argv[]);

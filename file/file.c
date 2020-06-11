@@ -35,23 +35,184 @@ int checkFile(char *filename[], int itsBin) {
     return 0;
 }
 
-void loadRacers(char *fileName[]) {
+void loadPieces(char *fileName[], Warehouse * warehouse) {
     FILE *file = NULL;
     char line[MAX_CHAR];
 
     printf("\n%s\n", (char *) fileName);
 
-    if (checkFile(fileName, false)) {
+    file = fopen((char *) fileName, "r");
+
+    if (file == NULL) {
         printf("\nError al abrir el fichero: %s\n", (char *) fileName);
     } else {
 
-        file = fopen(*fileName, "rb");
+        file = fopen((char *) fileName, "r");
+
+        int i = 0;
 
         while (!feof(file)) {
-            fscanf(file, "%s", line);
-            printf("\n%s\n", line);
+
+            switch (i) {
+                case 0:
+                    // total categories
+                    fgets(line, MAX_CHAR, file);
+                    (*warehouse).totalCategories = (int) atoi(&line[0]);
+                    printf("\ntotalCAT: %d\n", (*warehouse).totalCategories);
+                    (*warehouse).categories = (Category *) malloc(sizeof(Category) * (*warehouse).totalCategories);
+                    i++;
+                    break;
+                case 1:
+                    // categories
+                    for (int j = 0; j < (*warehouse).totalCategories; j++) {
+                        fgets(line, MAX_CHAR, file);
+                        strcpy((*warehouse).categories[j].name, line);
+                        fgets(line, MAX_CHAR, file);
+                        (*warehouse).categories[j].totalPieces = (int) atoi(&line[0]);
+                        (*warehouse).categories[j].pieces = (Piece *) malloc(sizeof(Piece) * (*warehouse).categories[j].totalPieces);
+
+                        // pieces
+                        for (int k = 0; k < (*warehouse).categories[j].totalPieces; k++) { // Piece
+                            fgets(line, MAX_CHAR, file);
+                            strcpy((*warehouse).categories[j].pieces[k].name, line);
+
+                            fgets(line, MAX_CHAR, file);
+                            (*warehouse).categories[j].pieces[k].speed = atoi(&line[0]);
+
+                            fgets(line, MAX_CHAR, file);
+                            (*warehouse).categories[j].pieces[k].acceleration = atoi(&line[0]);
+
+                            fgets(line, MAX_CHAR, file);
+                            (*warehouse).categories[j].pieces[k].consumption = atoi(&line[0]);
+
+                            fgets(line, MAX_CHAR, file);
+                            (*warehouse).categories[j].pieces[k].reliability = atoi(&line[0]);
+
+                        }
+                    }
+                    i++;
+                    break;
+                default:
+                    //next lines
+                    fgets(line, MAX_CHAR, file);
+                    break;
+            }
         }
 
         fclose(file);
+    }
+}
+
+void loadGPs(char *fileName[], Season * season) {
+    FILE *file = NULL;
+    char line[MAX_CHAR];
+
+    file = fopen((char *) fileName, "r");
+
+    if (file == NULL) {
+        printf("\nError al abrir el fichero: %s\n", (char *) fileName);
+    } else {
+
+        int i = 0;
+
+        while (!feof(file)) {
+            switch (i) {
+                case 0:
+                    // total gps
+                    fgets(line, MAX_CHAR, file);
+                    (*season).totalGps = atoi(&line[0]);
+                    (*season).gps = malloc(sizeof(Gps) * (*season).totalGps);
+                    i++;
+                    break;
+                case 1:
+                    // gps
+                    for (int j = 0; j < (*season).totalGps; ++j) {
+                        fgets(line, MAX_CHAR, file);
+                        (*season).gps[j].calendarPosition = atoi(&line[0]);
+
+                        fgets(line, MAX_CHAR, file);
+                        strcpy((*season).gps[j].name, line);
+
+                        fgets(line, MAX_CHAR, file);
+                        (*season).gps[j].properSpeed = atoi(&line[0]);
+
+                        fgets(line, MAX_CHAR, file);
+                        (*season).gps[j].properAcceleration = atoi(&line[0]);
+
+                        fgets(line, MAX_CHAR, file);
+                        (*season).gps[j].properConsumption = atoi(&line[0]);
+
+                        fgets(line, MAX_CHAR, file);
+                        (*season).gps[j].properFlexibility = atoi(&line[0]);
+
+                        fgets(line, MAX_CHAR, file);
+                        (*season).gps[j].baseTime = atoi(&line[0]);
+
+                        fgets(line, MAX_CHAR, file);
+                        (*season).gps[j].pitStopTime = atoi(&line[0]);
+
+                        fgets(line, MAX_CHAR, file);
+                        (*season).gps[j].pitStopNum = atoi(&line[0]);
+                    }
+                    i++;
+                    break;
+                default:
+                    fgets(line, MAX_CHAR, file);
+                    break;
+            }
+
+        }
+
+        fclose(file);
+    }
+}
+
+void loadRacers(char *fileName[], Racer * racers) {
+    FILE *file = NULL;
+    Racer line;
+    int num;
+
+    printf("\n%s\n", (char *) fileName);
+
+    file = fopen((char *) fileName, "rb");
+
+    if (file == NULL) {
+        printf("\nError al abrir el fichero: %s\n", (char *) fileName);
+    } else {
+
+        int i = 0;
+
+        fread(&line, sizeof(Racer), 1, file);
+        racers = (Racer *) malloc(sizeof(Racer));
+        racers[i] = line;
+
+        while (!feof(file)) {
+            i++;
+            fread(&line, sizeof(Racer), 1, file);
+            racers = (Racer *) realloc(racers, sizeof(Racer));
+            racers[i] = line;
+        }
+
+        fclose(file);
+    }
+}
+
+void loadBase(char *fileName[]) {
+    FILE *file = NULL;
+    char line[MAX_CHAR];
+
+    printf("\n%s\n", (char *) fileName);
+
+    file = fopen((char *) fileName, "rb");
+
+    if (file == NULL) {
+        printf("\nError al abrir el fichero: %s\n", (char *) fileName);
+    } else {
+
+        while (!feof(file)) {
+            fread(line, sizeof(line), 1, file);
+            printf("\n%s\n", line);
+        }
+
     }
 }

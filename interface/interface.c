@@ -40,7 +40,7 @@ int readOption(int * option) {
     return 0;
 }
 
-int switchOption(int * option) {
+int switchOption(int * option, Racer * racer, Warehouse * warehouse) {
 
     switch (*option) {
 
@@ -49,7 +49,7 @@ int switchOption(int * option) {
             return 1;
 
         case MENU_OPTION_1:
-            configureCar();
+            configureCar(racer, warehouse);
             return 0;
 
         case MENU_OPTION_2:
@@ -70,23 +70,148 @@ int switchOption(int * option) {
     }
 }
 
-void pilotData() {
+int racerData(Racer * racer) {
 
-    Racer racer;
+    // Check if racer exists
+    if (strlen((*racer).name) != 0) {
+        return 0;
+    }
+
     char userInput[MAX_CHAR];
     bool correctInput = false;
 
+    // Name
     while (!correctInput) {
         fflush(stdin);
         printf("\nNombre del piloto? ");
         scanf("%s", (char *) &userInput);
-        if (strlen(userInput) <= MAX_CHAR) {
-            strcpy(racer.name, userInput);
+        if (strlen(userInput) > 0 && strlen(userInput) <= MAX_CHAR) {
+            strcpy((*racer).name, userInput);
             correctInput = true;
         } else {
             printf("\nError, el tamaño maximo es de 25 caracteres\n");
         }
     }
 
+    correctInput = false;
 
+    // Team name
+    while (!correctInput) {
+        fflush(stdin);
+        printf("\nNombre de la escuderia? ");
+        scanf("%s", (char *) &userInput);
+        if (strlen(userInput) > 0 && strlen(userInput) <= MAX_CHAR) {
+            strcpy((*racer).team, userInput);
+            correctInput = true;
+        } else {
+            printf("\nError, el tamaño maximo es de 25 caracteres\n");
+        }
+    }
+
+    correctInput = false;
+
+    // Dorsal
+    while (!correctInput) {
+        int num;
+        char term;
+        fflush(stdin);
+        printf("\nDorsal? ");
+        if(scanf("%d%c", &num, &term) != 2 || term != '\n') { // check if its number
+            printf("\nError, el dorsal tiene que ser un entero entre 1 y 99\n");
+        } else {
+            if (num >= 1 && num <= 99) {
+                (*racer).dorsal = num;
+                correctInput = true;
+            } else {
+                printf("\nError, el dorsal tiene que ser un entero entre 1 y 99\n");
+            }
+
+        }
+    }
+
+    correctInput = false;
+
+    // Reflexes
+    while (!correctInput) {
+        int num;
+        char term;
+        fflush(stdin);
+        printf("\nReflejos? ");
+        if(scanf("%d%c", &num, &term) != 2 || term != '\n') { // check if its number
+            printf("\nError, reflejos tiene que ser un entero entre 0 y 10\n");
+        } else {
+            if (num >= 0 && num <= 10) {
+                (*racer).reflexes = num;
+                correctInput = true;
+            } else {
+                printf("\nError, reflejos tiene que ser un entero entre 0 y 10\n");
+            }
+
+        }
+    }
+
+    correctInput = false;
+
+    // Physical condition
+    while (!correctInput) {
+        int num;
+        char term;
+        fflush(stdin);
+        printf("\nCondicion fisica? ");
+        if(scanf("%d%c", &num, &term) != 2 || term != '\n') { // check if its number
+            printf("\nError, la condicion fisica tiene que ser un entero entre 0 y 10\n");
+        } else {
+            if (num >= 0 && num <= 10) {
+                (*racer).physicalCondition = num;
+                correctInput = true;
+            } else {
+                printf("\nError, la condicion fisica tiene que ser un entero entre 0 y 10\n");
+            }
+
+        }
+    }
+
+    correctInput = false;
+
+    // Temperament
+    while (!correctInput) {
+        int num;
+        char term;
+        fflush(stdin);
+        printf("\nTemperamento? ");
+        if(scanf("%d%c", &num, &term) != 2 || term != '\n') { // check if its number
+            printf("\nError, el temperamento tiene que ser un entero entre 0 y 10\n");
+        } else {
+            if (num >= 0 && num <= 10) {
+                (*racer).temperament = num;
+                correctInput = true;
+            } else {
+                printf("\nError, el temperamento tiene que ser un entero entre 0 y 10\n");
+            }
+
+        }
+    }
+
+    correctInput = false;
+
+    // Tire management
+    while (!correctInput) {
+        int num;
+        char term;
+        fflush(stdin);
+        printf("\nGestion de neumaticos? ");
+        if(scanf("%d%c", &num, &term) != 2 || term != '\n') { // check if its number
+            printf("\nError, la gestion de neumaticos tiene que ser un entero entre 0 y 10\n");
+        } else {
+            if (num >= 0 && num <= 10) {
+                (*racer).tireManagement = num;
+                correctInput = true;
+            } else {
+                printf("\nError, la gestion de neumaticos tiene que ser un entero entre 0 y 10\n");
+            }
+
+        }
+    }
+
+    return 0;
 }

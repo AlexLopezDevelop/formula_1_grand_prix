@@ -1,9 +1,13 @@
-#ifndef FORMULA_1_GRAND_PRIX_CONFIGURATION_H
-#define FORMULA_1_GRAND_PRIX_CONFIGURATION_H
+//
+// Created by Alex Lopez on 20/05/2020.
+//
 
+#ifndef F1_CONFIGURATION_H
+#define F1_CONFIGURATION_H
+
+#include "../models/racer.h"
 #include "../interface/interface.h"
-#include <stdbool.h>
 
-void configureCar();
+void configureCar(Racer * racer, Warehouse * warehouse);
 
-#endif //FORMULA_1_GRAND_PRIX_CONFIGURATION_H
+#endif //F1_CONFIGURATION_H

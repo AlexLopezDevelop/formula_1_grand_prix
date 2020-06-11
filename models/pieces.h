@@ -12,12 +12,18 @@ typedef struct {
     int speed;
     int acceleration;
     int consumption;
+    int reliability;
 } Piece;
 
 typedef struct {
     char name[MAX_CHAR];
     int totalPieces;
-    Piece *pieces[];
+    Piece *pieces;
 } Category;
+
+typedef struct {
+    int totalCategories;
+    Category *categories;
+} Warehouse;
 
 #endif //F1_PIECES_H

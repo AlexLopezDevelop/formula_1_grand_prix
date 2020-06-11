@@ -15,8 +15,13 @@ typedef struct {
     int properConsumption;
     int properFlexibility;
     float baseTime;
-    int pitStop;
+    int pitStopTime;
     int pitStopNum;
 } Gps;
+
+typedef struct {
+    int totalGps;
+    Gps * gps;
+} Season;
 
 #endif //F1_GPS_H

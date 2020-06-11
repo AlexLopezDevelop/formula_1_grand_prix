@@ -5,7 +5,7 @@
 #ifndef F1_RACER_H
 #define F1_RACER_H
 
-#include "../game.h"
+#define MAX_CHAR 25
 
 typedef struct {
     char name[MAX_CHAR];
@@ -19,6 +19,6 @@ typedef struct {
     int physicalCondition;
     int temperament;
     int tireManagement;
-} Racer;
+}Racer;
 
 #endif //F1_RACER_H

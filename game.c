@@ -8,15 +8,22 @@ void startGame(int argc, char *argv[]) {
     printf("\nCreated by cristianalex.lopez\n");
     printf("\nBienvenidos a LS Racing!\n");
 
-    // Load files
+    // Store all pieces
+    Warehouse * warehouse = malloc(sizeof(Warehouse));
+    Season * season = malloc(sizeof(Season));
+    Racer * racers;
 
-    //loadGPs(argv[1]);
-    //loadPieces(argv[2]);
+    (*warehouse).totalCategories = 2;
+
+    // Load files
+    //loadGPs(argv[1], season);
+    //loadPieces(argv[2], warehouse);
     //loadBase(argv[3]);
-    //loadRacers(argv[4]);
+    loadRacers(argv[4], racers);
 
     int * option = 0;
     int endGame = false;
+    Racer * racer = malloc(sizeof(Racer));
 
     while(!endGame){
 
@@ -27,7 +34,7 @@ void startGame(int argc, char *argv[]) {
             correctInput = readOption((int *) &option);
         }
 
-        endGame = switchOption((int *) &option);
+        endGame = switchOption((int *) &option, racer, warehouse);
     }
 }
 

@@ -18,11 +18,12 @@
 
 #include "../game.h"
 #include "../models/racer.h"
+#include "../models/pieces.h"
 #include "../configuration/configuration.h"
 
 void showMainMenu();
 int readOption(int * option);
-int switchOption(int * option);
-void pilotData();
+int switchOption(int * option, Racer * racer, Warehouse * warehouse);
+int racerData(Racer * racer);
 
 #endif //F1_INTERFACE_H
