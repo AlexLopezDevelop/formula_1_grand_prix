@@ -9,27 +9,30 @@ void startGame(int argc, char *argv[]) {
     printf("\nBienvenidos a LS Racing!\n");
 
     // Store all pieces
-    Warehouse * warehouse = malloc(sizeof(Warehouse));
     Season * season = malloc(sizeof(Season));
     Racer * racer = malloc(sizeof(Racer));
-    Racers racers;
     Base base;
     Championship * championship = malloc(sizeof(Championship));
     Player *  player = malloc(sizeof(Player));
     Car * car = malloc(sizeof(Car));
     (*player).car = car;
 
+    (*championship).racers = malloc(sizeof(Racers));
+    (*(*championship).racers).racer = malloc(sizeof(Racer));
+
+    (*championship).warehouse = malloc(sizeof(Warehouse));
+    (*(*championship).warehouse).categories = malloc(sizeof(Category));
+    (*(*(*championship).warehouse).categories).pieces = malloc(sizeof(Piece));
+
     // Load files
     loadGPs(argv[1], season);
-    loadPieces(argv[2], warehouse);
+    loadPieces(argv[2], championship);
     loadBase(argv[3], &base);
-    loadRacers(argv[4], &racers);
+    loadRacers(argv[4], championship);
 
     // init game model
     (*championship).season = season;
-    (*championship).warehouse = warehouse;
     (*championship).base = &base;
-    (*championship).racers = &racers;
 
     // init game
     int * option = 0;

@@ -16,8 +16,8 @@
 #include <stdbool.h>
 
 int checkFile(char *filename[], int itsBin);
-void loadPieces(char *filename[], Warehouse * warehouse);
+void loadPieces(char *filename[], Championship * championship);
 void loadGPs(char *fileName[], Season * season);
-void loadRacers(char *filename[], Racers * racers);
+void loadRacers(char *filename[], Championship * championship);
 void loadBase(char *fileName[], Base * base);
 #endif //F1_FILE_H

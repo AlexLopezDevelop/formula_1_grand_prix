@@ -35,7 +35,7 @@ int checkFile(char *filename[], int itsBin) {
     return 0;
 }
 
-void loadPieces(char *fileName[], Warehouse * warehouse) {
+void loadPieces(char *fileName[], Championship * championship) {
     FILE *file = NULL;
     char line[MAX_CHAR];
 
@@ -55,35 +55,35 @@ void loadPieces(char *fileName[], Warehouse * warehouse) {
                 case 0:
                     // total categories
                     fgets(line, MAX_CHAR, file);
-                    (*warehouse).totalCategories = (int) atoi(&line[0]);
-                    (*warehouse).categories = (Category *) malloc(sizeof(Category) * (*warehouse).totalCategories);
+                    (*(*championship).warehouse).totalCategories = (int) atoi(&line[0]);
+                    (*(*championship).warehouse).categories = (Category *) realloc((*(*championship).warehouse).categories, sizeof(Category) * (*(*championship).warehouse).totalCategories -1);
                     i++;
                     break;
                 case 1:
                     // categories
-                    for (int j = 0; j < (*warehouse).totalCategories; j++) {
+                    for (int j = 0; j < (*(*championship).warehouse).totalCategories; j++) {
                         fgets(line, MAX_CHAR, file);
-                        strcpy((*warehouse).categories[j].name, line);
+                        strcpy((*(*championship).warehouse).categories[j].name, line);
                         fgets(line, MAX_CHAR, file);
-                        (*warehouse).categories[j].totalPieces = (int) atoi(&line[0]);
-                        (*warehouse).categories[j].pieces = (Piece *) malloc(sizeof(Piece) * (*warehouse).categories[j].totalPieces);
+                        (*(*championship).warehouse).categories[j].totalPieces = (int) atoi(&line[0]);
+                        (*(*championship).warehouse).categories[j].pieces = (Piece *) malloc(sizeof(Piece) * (*(*championship).warehouse).categories[j].totalPieces);
 
                         // pieces
-                        for (int k = 0; k < (*warehouse).categories[j].totalPieces; k++) { // Piece
+                        for (int k = 0; k < (*(*championship).warehouse).categories[j].totalPieces; k++) { // Piece
                             fgets(line, MAX_CHAR, file);
-                            strcpy((*warehouse).categories[j].pieces[k].name, line);
+                            strcpy((*(*championship).warehouse).categories[j].pieces[k].name, line);
 
                             fgets(line, MAX_CHAR, file);
-                            (*warehouse).categories[j].pieces[k].speed = atoi(&line[0]);
+                            (*(*championship).warehouse).categories[j].pieces[k].speed = atoi(&line[0]);
 
                             fgets(line, MAX_CHAR, file);
-                            (*warehouse).categories[j].pieces[k].acceleration = atoi(&line[0]);
+                            (*(*championship).warehouse).categories[j].pieces[k].acceleration = atoi(&line[0]);
 
                             fgets(line, MAX_CHAR, file);
-                            (*warehouse).categories[j].pieces[k].consumption = atoi(&line[0]);
+                            (*(*championship).warehouse).categories[j].pieces[k].consumption = atoi(&line[0]);
 
                             fgets(line, MAX_CHAR, file);
-                            (*warehouse).categories[j].pieces[k].reliability = atoi(&line[0]);
+                            (*(*championship).warehouse).categories[j].pieces[k].reliability = atoi(&line[0]);
 
                         }
                     }
@@ -165,10 +165,9 @@ void loadGPs(char *fileName[], Season * season) {
     }
 }
 
-void loadRacers(char *fileName[], Racers * racers) {
+void loadRacers(char *fileName[], Championship * championship) {
     FILE *file = NULL;
     Racer line;
-    Racer * racer;
 
     file = fopen((char *) fileName, "rb");
 
@@ -179,19 +178,17 @@ void loadRacers(char *fileName[], Racers * racers) {
         int i = 0;
 
         fread(&line, sizeof(Racer), 1, file);
-        racer = (Racer *) malloc(sizeof(Racer));
-        racer[i] = line;
+        (*(*championship).racers).racer[0] = line;
 
         while (!feof(file)) {
             i++;
             fread(&line, sizeof(Racer), 1, file);
-            racer = (Racer *) realloc(racer, sizeof(Racer));
-            racer[i] = line;
+            (*(*championship).racers).racer = (Racer *) realloc((*(*championship).racers).racer, sizeof(Racer));
+            (*(*championship).racers).racer[i] = line;
         }
 
         // setup racers
-        (*racers).totalRacers = i;
-        (*racers).racer = racer;
+        (*(*championship).racers).totalRacers = i;
         fclose(file);
     }
 }
