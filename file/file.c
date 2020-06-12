@@ -167,10 +167,10 @@ void loadGPs(char *fileName[], Season * season) {
     }
 }
 
-void loadRacers(char *fileName[], Racer * racers) {
+void loadRacers(char *fileName[], Racers * racers) {
     FILE *file = NULL;
     Racer line;
-    int num;
+    Racer * racer;
 
     printf("\n%s\n", (char *) fileName);
 
@@ -183,23 +183,26 @@ void loadRacers(char *fileName[], Racer * racers) {
         int i = 0;
 
         fread(&line, sizeof(Racer), 1, file);
-        racers = (Racer *) malloc(sizeof(Racer));
-        racers[i] = line;
+        racer = (Racer *) malloc(sizeof(Racer));
+        racer[i] = line;
 
         while (!feof(file)) {
             i++;
             fread(&line, sizeof(Racer), 1, file);
-            racers = (Racer *) realloc(racers, sizeof(Racer));
-            racers[i] = line;
+            racer = (Racer *) realloc(racer, sizeof(Racer));
+            racer[i] = line;
         }
 
+        // setup racers
+        (*racers).totalRacers = i;
+        (*racers).racer = racer;
         fclose(file);
     }
 }
 
-void loadBase(char *fileName[]) {
+void loadBase(char *fileName[], Base * base) {
     FILE *file = NULL;
-    char line[MAX_CHAR];
+    Base line;
 
     printf("\n%s\n", (char *) fileName);
 
@@ -209,10 +212,15 @@ void loadBase(char *fileName[]) {
         printf("\nError al abrir el fichero: %s\n", (char *) fileName);
     } else {
 
+        // Only one time
+        fread(&line, sizeof(Base), 1, file);
+        *base = line;
+
+        // avoid data below
         while (!feof(file)) {
-            fread(line, sizeof(line), 1, file);
-            printf("\n%s\n", line);
+            fread(&line, sizeof(Base), 1, file);
         }
 
+        fclose(file);
     }
 }

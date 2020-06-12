@@ -11,19 +11,26 @@ void startGame(int argc, char *argv[]) {
     // Store all pieces
     Warehouse * warehouse = malloc(sizeof(Warehouse));
     Season * season = malloc(sizeof(Season));
-    Racer * racers;
-
-    (*warehouse).totalCategories = 2;
+    Racer * racer = malloc(sizeof(Racer));
+    Racers racers;
+    Base base;
+    Championship championship;
 
     // Load files
-    //loadGPs(argv[1], season);
-    //loadPieces(argv[2], warehouse);
-    //loadBase(argv[3]);
-    loadRacers(argv[4], racers);
+    loadGPs(argv[1], season);
+    loadPieces(argv[2], warehouse);
+    loadBase(argv[3], &base);
+    loadRacers(argv[4], &racers);
 
+    // init game model
+    championship.season = season;
+    championship.warehouse = warehouse;
+    championship.base = &base;
+    championship.racers = &racers;
+
+    // init game
     int * option = 0;
     int endGame = false;
-    Racer * racer = malloc(sizeof(Racer));
 
     while(!endGame){
 
@@ -34,7 +41,7 @@ void startGame(int argc, char *argv[]) {
             correctInput = readOption((int *) &option);
         }
 
-        endGame = switchOption((int *) &option, racer, warehouse);
+        endGame = switchOption((int *) &option, racer, &championship);
     }
 }
 
@@ -86,4 +93,23 @@ int checkArgs(int argc, char *argv[]) {
     }
 
     return 0;
+}
+
+void freeMemory(int * option, Racer * racer, Championship * championship) {
+    //free(option);
+    free(racer);
+
+    free((*(*championship).racers).racer);
+    //free((*championship).racers);
+
+    free((*(*(*championship).warehouse).categories).pieces);
+    free((*(*championship).warehouse).categories);
+    //free((*championship).warehouse);
+
+    free((*(*championship).season).gps);
+    //free((*championship).season);
+
+    //free((*championship).base);
+
+    //free(championship);
 }

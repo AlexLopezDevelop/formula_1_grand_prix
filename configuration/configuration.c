@@ -4,7 +4,7 @@
 
 #include "configuration.h"
 
-void configureCar(Racer * racer, Warehouse * warehouse) {
+void configureCar(Racer * racer, Championship * championship) {
     racerData(racer);
 
     //Init Allegro
@@ -12,6 +12,8 @@ void configureCar(Racer * racer, Warehouse * warehouse) {
 
     // Screen actions
     int closeWindow = false;
+    int currentPiece = 0;
+    int currentCategory = 0;
     while(!closeWindow) {
 
         // Close window
@@ -21,27 +23,55 @@ void configureCar(Racer * racer, Warehouse * warehouse) {
 
         // Piece category
         if (LS_allegro_key_pressed(ALLEGRO_KEY_UP)) {
-            printf("\narriba\n");
-        } else if (LS_allegro_key_pressed(ALLEGRO_KEY_DOWN)) {
-            printf("\nabajo\n");
+
+            if (currentCategory > 0) {
+                currentCategory--;
+            } else {
+                currentCategory = (*(*championship).warehouse).totalCategories - 1;
+            }
+
+        }
+
+        if (LS_allegro_key_pressed(ALLEGRO_KEY_DOWN)) {
+
+            if (currentCategory < (*(*championship).warehouse).totalCategories - 1) {
+                currentCategory++;
+            } else {
+                currentCategory = 0;
+            }
+
         }
 
         // Model piece
         if (LS_allegro_key_pressed(ALLEGRO_KEY_LEFT)) {
-            printf("\nizquierda\n");
-        } else if (LS_allegro_key_pressed(ALLEGRO_KEY_RIGHT)) {
-            printf("\nderecha\n");
+
+            if (currentPiece > 0) {
+                currentPiece--;
+            } else {
+                currentPiece = (*(*championship).warehouse).categories[currentCategory].totalPieces - 1;
+            }
+
+        }
+
+        if (LS_allegro_key_pressed(ALLEGRO_KEY_RIGHT)) {
+            if (currentPiece < (*(*championship).warehouse).categories[currentCategory].totalPieces - 1) {
+                currentPiece++;
+            } else {
+                currentPiece = 0;
+            }
         }
 
 
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,60,0,"%s", (*warehouse).categories[0].pieces[0].name);
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,100,0,"%s","Velocidad: ");
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,150,0,"%s","Aceleracion: ");
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,170,0,"%s","Consumo: ");
-        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,190,0,"%s","Fiabilidad: ");
+        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,60,0,"%s", (*(*championship).warehouse).categories[currentCategory].pieces[currentPiece].name);
 
-        al_draw_textf(LS_allegro_get_font(EXTRA_LARGE),LS_allegro_get_color(WHITE),100,250,0,"%s","Neumaticos");
-        al_draw_textf(LS_allegro_get_font(LARGE),LS_allegro_get_color(WHITE),100,270,0,"%s","Configuracion Actual");
+        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,80,0,"%s %d","Velocidad: ", (*(*championship).warehouse).categories[currentCategory].pieces[currentPiece].speed);
+
+        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,100,0,"%s %d","Aceleracion: ", (*(*championship).warehouse).categories[currentCategory].pieces[currentPiece].acceleration);
+        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,120,0,"%s %d","Consumo: ", (*(*championship).warehouse).categories[currentCategory].pieces[currentPiece].consumption);
+        al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,140,0,"%s %d","Fiabilidad: ", (*(*championship).warehouse).categories[currentCategory].pieces[currentPiece].reliability);
+
+        al_draw_textf(LS_allegro_get_font(EXTRA_LARGE),LS_allegro_get_color(WHITE),100,200,0,"%s","Neumaticos");
+        al_draw_textf(LS_allegro_get_font(LARGE),LS_allegro_get_color(WHITE),100,250,0,"%s","Configuracion Actual");
         al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,280,0,"%s","Neumaticos:");
         al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,300,0,"%s","Aero frontal: ");
         al_draw_textf(LS_allegro_get_font(NORMAL),LS_allegro_get_color(WHITE),100,320,0,"%s","Aero zona media: ");

@@ -21,4 +21,9 @@ typedef struct {
     int tireManagement;
 }Racer;
 
+typedef struct {
+    int totalRacers;
+    Racer * racer;
+}Racers;
+
 #endif //F1_RACER_H

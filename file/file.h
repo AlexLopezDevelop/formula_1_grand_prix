@@ -9,13 +9,13 @@
 #include "../models/pieces.h"
 #include "../models/gps.h"
 #include "../models/racer.h"
+#include "../models/base.h"
 #include <stdio.h>
 #include <stdbool.h>
 
-void read_txt(char filename[MAX_CHAR]);
 int checkFile(char *filename[], int itsBin);
 void loadPieces(char *filename[], Warehouse * warehouse);
 void loadGPs(char *fileName[], Season * season);
-void loadRacers(char *filename[], Racer * racers);
-void loadBase(char *fileName[]);
+void loadRacers(char *filename[], Racers * racers);
+void loadBase(char *fileName[], Base * base);
 #endif //F1_FILE_H

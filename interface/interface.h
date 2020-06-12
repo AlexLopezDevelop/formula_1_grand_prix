@@ -16,14 +16,13 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "../game.h"
-#include "../models/racer.h"
-#include "../models/pieces.h"
 #include "../configuration/configuration.h"
+#include "../models/racer.h"
+#include "../models/championship.h"
 
 void showMainMenu();
 int readOption(int * option);
-int switchOption(int * option, Racer * racer, Warehouse * warehouse);
+int switchOption(int * option, Racer * racer, Championship * championship);
 int racerData(Racer * racer);
 
 #endif //F1_INTERFACE_H

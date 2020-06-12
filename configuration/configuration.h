@@ -5,9 +5,10 @@
 #ifndef F1_CONFIGURATION_H
 #define F1_CONFIGURATION_H
 
+#include "../game.h"
+#include "../models/championship.h"
 #include "../models/racer.h"
-#include "../interface/interface.h"
 
-void configureCar(Racer * racer, Warehouse * warehouse);
+void configureCar(Racer * racer, Championship * championship);
 
 #endif //F1_CONFIGURATION_H

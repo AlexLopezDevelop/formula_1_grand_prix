@@ -2,6 +2,7 @@
 // Created by Alex Lopez on 16/05/2020.
 //
 
+#include "../game.h"
 #include "interface.h"
 
 void showMainMenu() {
@@ -40,16 +41,17 @@ int readOption(int * option) {
     return 0;
 }
 
-int switchOption(int * option, Racer * racer, Warehouse * warehouse) {
+int switchOption(int * option, Racer * racer, Championship * championship) {
 
     switch (*option) {
 
-        case MENU_OPTION_EXIT:
+        case 5:
+            freeMemory(option, racer, championship);
             printf("\nHasta pronto!\n");
             return 1;
 
         case MENU_OPTION_1:
-            configureCar(racer, warehouse);
+            configureCar(racer, championship);
             return 0;
 
         case MENU_OPTION_2:
