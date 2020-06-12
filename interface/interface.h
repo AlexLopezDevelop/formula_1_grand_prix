@@ -20,6 +20,7 @@
 #include "../models/racer.h"
 #include "../models/player.h"
 #include "../models/championship.h"
+#include "../race/race.h"
 
 void showMainMenu();
 int readOption(int * option);

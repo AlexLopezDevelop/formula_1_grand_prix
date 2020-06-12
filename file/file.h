@@ -5,6 +5,8 @@
 #ifndef F1_FILE_H
 #define F1_FILE_H
 
+#define START_CALENDAR_POSITION 0 // Starts in season 1
+
 #include "../game.h"
 #include "../models/pieces.h"
 #include "../models/gps.h"

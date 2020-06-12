@@ -21,6 +21,7 @@ typedef struct {
 
 typedef struct {
     int totalGps;
+    int currentCalendarPosition;
     Gps * gps;
 } Season;
 

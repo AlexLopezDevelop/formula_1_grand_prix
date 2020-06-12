@@ -39,8 +39,6 @@ void loadPieces(char *fileName[], Warehouse * warehouse) {
     FILE *file = NULL;
     char line[MAX_CHAR];
 
-    printf("\n%s\n", (char *) fileName);
-
     file = fopen((char *) fileName, "r");
 
     if (file == NULL) {
@@ -58,7 +56,6 @@ void loadPieces(char *fileName[], Warehouse * warehouse) {
                     // total categories
                     fgets(line, MAX_CHAR, file);
                     (*warehouse).totalCategories = (int) atoi(&line[0]);
-                    printf("\ntotalCAT: %d\n", (*warehouse).totalCategories);
                     (*warehouse).categories = (Category *) malloc(sizeof(Category) * (*warehouse).totalCategories);
                     i++;
                     break;
@@ -121,6 +118,7 @@ void loadGPs(char *fileName[], Season * season) {
                     // total gps
                     fgets(line, MAX_CHAR, file);
                     (*season).totalGps = atoi(&line[0]);
+                    (*season).currentCalendarPosition = START_CALENDAR_POSITION;
                     (*season).gps = malloc(sizeof(Gps) * (*season).totalGps);
                     i++;
                     break;
@@ -172,8 +170,6 @@ void loadRacers(char *fileName[], Racers * racers) {
     Racer line;
     Racer * racer;
 
-    printf("\n%s\n", (char *) fileName);
-
     file = fopen((char *) fileName, "rb");
 
     if (file == NULL) {
@@ -203,8 +199,6 @@ void loadRacers(char *fileName[], Racers * racers) {
 void loadBase(char *fileName[], Base * base) {
     FILE *file = NULL;
     Base line;
-
-    printf("\n%s\n", (char *) fileName);
 
     file = fopen((char *) fileName, "rb");
 

@@ -55,7 +55,7 @@ int switchOption(int * option, Racer * racer, Championship * championship, Playe
             return 0;
 
         case MENU_OPTION_2:
-
+            startRace(championship, player);
             return 0;
 
         case MENU_OPTION_3:
@@ -209,6 +209,8 @@ int racerData(Racer * racer) {
 
         }
     }
+
+    printf("\nCargando configurador\n");
 
     return 0;
 }
