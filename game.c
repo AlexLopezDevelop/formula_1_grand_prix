@@ -14,7 +14,7 @@ void startGame(int argc, char *argv[]) {
     Racer * racer = malloc(sizeof(Racer));
     Racers racers;
     Base base;
-    Championship championship;
+    Championship * championship = malloc(sizeof(Championship));
     Player *  player = malloc(sizeof(Player));
     Car * car = malloc(sizeof(Car));
     (*player).car = car;
@@ -26,10 +26,10 @@ void startGame(int argc, char *argv[]) {
     loadRacers(argv[4], &racers);
 
     // init game model
-    championship.season = season;
-    championship.warehouse = warehouse;
-    championship.base = &base;
-    championship.racers = &racers;
+    (*championship).season = season;
+    (*championship).warehouse = warehouse;
+    (*championship).base = &base;
+    (*championship).racers = &racers;
 
     // init game
     int * option = 0;
@@ -44,7 +44,7 @@ void startGame(int argc, char *argv[]) {
             correctInput = readOption((int *) &option);
         }
 
-        endGame = switchOption((int *) &option, racer, &championship, player);
+        endGame = switchOption((int *) &option, racer, championship, player);
     }
 }
 

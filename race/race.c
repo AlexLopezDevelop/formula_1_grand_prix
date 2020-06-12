@@ -122,4 +122,57 @@ int startRace(Championship * championship, Player * player) {
     initView(championship);
     trafficLight();
 
+    int currentSeason = (*(*championship).season).currentCalendarPosition;
+    int seasonSpeed = (*(*championship).season[currentSeason].gps).properSpeed;
+    int seasonAcceleration = (*(*championship).season[currentSeason].gps).properAcceleration;
+    int seasonConsumption = (*(*championship).season[currentSeason].gps).properConsumption;
+    int seasonFlexibility = (*(*championship).season[currentSeason].gps).properFlexibility;
+    int totalRacers = (*(*championship).racers).totalRacers;
+
+    Racers * racersSeason;
+    Racer * racerSeason;
+
+    // create racers with season data
+    for (int i = 0; i < totalRacers; ++i) {
+
+        if (i == 0) {
+            racerSeason = malloc(sizeof(Racer));
+        } else {
+            racerSeason = (Racer *) realloc(racerSeason, sizeof(Racer));
+        }
+
+        racerSeason[i].speed = seasonSpeed - (*(*championship).racers).racer[i].speed;
+        racerSeason[i].acceleration = seasonAcceleration - (*(*championship).racers).racer[i].speed;
+        racerSeason[i].consumption = seasonConsumption - (*(*championship).racers).racer[i].consumption;
+        (*racerSeason).flexibility = seasonFlexibility - (*(*championship).racers).racer[i].flexibility;
+        strcpy(racerSeason[i].name, (*(*championship).racers).racer[i].name);
+        strcpy(racerSeason[i].team, (*(*championship).racers).racer[i].team);
+        racerSeason[i].dorsal = (*(*championship).racers).racer[i].dorsal;
+        racerSeason[i].physicalCondition = (*(*championship).racers).racer[i].physicalCondition;
+        racerSeason[i].reflexes = (*(*championship).racers).racer[i].reflexes;
+        racerSeason[i].temperament = (*(*championship).racers).racer[i].temperament;
+        racerSeason[i].tireManagement = (*(*championship).racers).racer[i].tireManagement;
+
+    }
+
+    // add player
+    racerSeason = realloc(racerSeason, sizeof(Racer));
+
+    racerSeason[totalRacers + 1].speed = seasonSpeed - (*(*player).racer).speed;
+    racerSeason[totalRacers + 1].acceleration = seasonAcceleration - (*(*player).racer).speed;
+    racerSeason[totalRacers + 1].consumption = seasonConsumption - (*(*player).racer).consumption;
+    racerSeason[totalRacers + 1].flexibility = seasonFlexibility - (*(*player).racer).flexibility;
+    strcpy(racerSeason[totalRacers + 1].name, (*(*player).racer).name);
+    strcpy(racerSeason[totalRacers + 1].team, (*(*player).racer).team);
+    racerSeason[totalRacers + 1].dorsal = (*(*player).racer).dorsal;
+    racerSeason[totalRacers + 1].physicalCondition = (*(*player).racer).physicalCondition;
+    racerSeason[totalRacers + 1].reflexes = (*(*player).racer).reflexes;
+    racerSeason[totalRacers + 1].temperament = (*(*player).racer).temperament;
+    racerSeason[totalRacers + 1].tireManagement = (*(*player).racer).tireManagement;
+
+    // add all players
+    racersSeason = malloc(sizeof(Racers));
+    (*racersSeason).racer = racerSeason;
+    (*racersSeason).totalRacers = (*(*championship).racers).totalRacers + 1;
+
 }
