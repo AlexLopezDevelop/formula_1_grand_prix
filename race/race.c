@@ -176,6 +176,46 @@ int startRace(Championship * championship, Player * player) {
     (*racersSeason).racer[totalRacers + 1] = racer;
     (*racersSeason).totalRacers = totalRacers;
 
+    // get seconds players
+    int * racersSeconds = racersSeconds = malloc(sizeof(int) * (*racersSeason).totalRacers);
+    int seasonSeconds = (*(*championship).season[currentSeason].gps).baseTime;
 
+    for (int j = 0; j < (*racersSeason).totalRacers; ++j) {
+        racersSeconds[j] = seasonSeconds + (*racersSeason).racer[j].speed + (*racersSeason).racer[j].acceleration + (*racersSeason).racer[j].consumption + (*racersSeason).racer[j].flexibility;
+    }
 
+    // get pit stop players and update time
+    int * racersPitStops = racersPitStops = malloc(sizeof(int) * (*racersSeason).totalRacers);
+    int seasonPitStops;
+    int playerPitStopTime;
+
+    for (int j = 0; j < (*racersSeason).totalRacers; ++j) {
+
+        seasonPitStops = (*(*championship).season[currentSeason].gps).pitStopNum;
+
+        if ((*racersSeason).racer[j].speed + (*racersSeason).racer[j].consumption < (*(*championship).season[currentSeason].gps).properConsumption) {
+            seasonPitStops--;
+        } else {
+            seasonPitStops++;
+        }
+
+        racersPitStops[j] = playerPitStopTime;
+        playerPitStopTime = 5 * seasonPitStops;
+
+        // update time
+        racersSeconds[j] = racersSeconds[j] + playerPitStopTime;
+    }
+
+    // update time with player skills
+    int totalPlayerSkills;
+    int playerSkillTime;
+
+    for (int k = 0; k < (*racersSeason).totalRacers; ++k) {
+
+        totalPlayerSkills = (*racersSeason).racer[k].reflexes + (*racersSeason).racer[k].physicalCondition + (*racersSeason).racer[k].temperament + (*racersSeason).racer[k].tireManagement;
+
+        playerSkillTime = (totalPlayerSkills / 4) / 2;
+
+        racersSeconds[k] = racersSeconds[k] - playerSkillTime;
+    }
 }
