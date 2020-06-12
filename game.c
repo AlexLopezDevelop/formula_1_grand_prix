@@ -15,6 +15,9 @@ void startGame(int argc, char *argv[]) {
     Racers racers;
     Base base;
     Championship championship;
+    Player *  player = malloc(sizeof(Player));
+    Car * car = malloc(sizeof(Car));
+    (*player).car = car;
 
     // Load files
     loadGPs(argv[1], season);
@@ -41,7 +44,7 @@ void startGame(int argc, char *argv[]) {
             correctInput = readOption((int *) &option);
         }
 
-        endGame = switchOption((int *) &option, racer, &championship);
+        endGame = switchOption((int *) &option, racer, &championship, player);
     }
 }
 

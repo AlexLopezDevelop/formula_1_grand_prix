@@ -18,6 +18,7 @@
 #include "models/gps.h"
 #include "models/base.h"
 #include "models/championship.h"
+#include "models/player.h"
 
 void startGame(int argc, char *argv[]);
 int checkArgs(int argc, char *argv[]);

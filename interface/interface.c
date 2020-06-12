@@ -41,7 +41,7 @@ int readOption(int * option) {
     return 0;
 }
 
-int switchOption(int * option, Racer * racer, Championship * championship) {
+int switchOption(int * option, Racer * racer, Championship * championship, Player * player) {
 
     switch (*option) {
 
@@ -51,7 +51,7 @@ int switchOption(int * option, Racer * racer, Championship * championship) {
             return 1;
 
         case MENU_OPTION_1:
-            configureCar(racer, championship);
+            configureCar(racer, championship, player);
             return 0;
 
         case MENU_OPTION_2:
@@ -73,11 +73,6 @@ int switchOption(int * option, Racer * racer, Championship * championship) {
 }
 
 int racerData(Racer * racer) {
-
-    // Check if racer exists
-    if (strlen((*racer).name) != 0) {
-        return 0;
-    }
 
     char userInput[MAX_CHAR];
     bool correctInput = false;

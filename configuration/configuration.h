@@ -8,7 +8,8 @@
 #include "../game.h"
 #include "../models/championship.h"
 #include "../models/racer.h"
+#include "../models/player.h"
 
-void configureCar(Racer * racer, Championship * championship);
+void configureCar(Racer * racer, Championship * championship, Player * player);
 
 #endif //F1_CONFIGURATION_H
