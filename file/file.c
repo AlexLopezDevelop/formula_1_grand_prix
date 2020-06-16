@@ -3,14 +3,14 @@
 //
 #include "file.h"
 
-int checkFile(char *filename[], int itsBin) {
+int checkFile(char *filename, int itsBin) {
     FILE * file;
 
     // Check can open
     if (itsBin) {
-        file = fopen(*filename, "rb");
+        file = fopen(filename, "rb");
     } else {
-        file = fopen(*filename, "r");
+        file = fopen(filename, "r");
     }
 
     if (file == NULL) {
@@ -35,7 +35,7 @@ int checkFile(char *filename[], int itsBin) {
     return 0;
 }
 
-void loadPieces(char *fileName[], Championship * championship) {
+void loadPieces(char *fileName, Championship * championship) {
     FILE *file = NULL;
     char line[MAX_CHAR];
 
@@ -56,7 +56,7 @@ void loadPieces(char *fileName[], Championship * championship) {
                     // total categories
                     fgets(line, MAX_CHAR, file);
                     (*(*championship).warehouse).totalCategories = (int) atoi(&line[0]);
-                    (*(*championship).warehouse).categories = (Category *) realloc((*(*championship).warehouse).categories, sizeof(Category) * (*(*championship).warehouse).totalCategories -1);
+                    (*(*championship).warehouse).categories = (Category *) malloc(sizeof(Category) * (*(*championship).warehouse).totalCategories);
                     i++;
                     break;
                 case 1:
@@ -100,7 +100,7 @@ void loadPieces(char *fileName[], Championship * championship) {
     }
 }
 
-void loadGPs(char *fileName[], Season * season) {
+void loadGPs(char * fileName, Season * season) {
     FILE *file = NULL;
     char line[MAX_CHAR];
 
@@ -165,7 +165,7 @@ void loadGPs(char *fileName[], Season * season) {
     }
 }
 
-void loadRacers(char *fileName[], Championship * championship) {
+void loadRacers(char *fileName, Championship * championship) {
     FILE *file = NULL;
     Racer line;
 
@@ -187,13 +187,13 @@ void loadRacers(char *fileName[], Championship * championship) {
             (*(*championship).racers).racer[i] = line;
         }
 
-        // setup racers
+        // setup racersº
         (*(*championship).racers).totalRacers = i;
         fclose(file);
     }
 }
 
-void loadBase(char *fileName[], Base * base) {
+void loadBase(char *fileName, Base * base) {
     FILE *file = NULL;
     Base line;
 

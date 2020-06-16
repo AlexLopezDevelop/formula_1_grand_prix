@@ -21,8 +21,8 @@ void startGame(int argc, char *argv[]) {
     (*(*championship).racers).racer = malloc(sizeof(Racer));
 
     (*championship).warehouse = malloc(sizeof(Warehouse));
-    (*(*championship).warehouse).categories = malloc(sizeof(Category));
-    (*(*(*championship).warehouse).categories).pieces = malloc(sizeof(Piece));
+    //(*(*championship).warehouse).categories = malloc(sizeof(Category));
+    //(*(*(*championship).warehouse).categories).pieces = malloc(sizeof(Piece));
 
     // Load files
     loadGPs(argv[1], season);
@@ -35,7 +35,7 @@ void startGame(int argc, char *argv[]) {
     (*championship).base = &base;
 
     // init game
-    int * option = 0;
+    int option = 0;
     int endGame = false;
 
     while(!endGame){
@@ -44,10 +44,10 @@ void startGame(int argc, char *argv[]) {
 
         while (!correctInput) {
             showMainMenu();
-            correctInput = readOption((int *) &option);
+            correctInput = readOption(&option);
         }
 
-        endGame = switchOption((int *) &option, racer, championship, player);
+        endGame = switchOption(&option, racer, championship, player);
     }
 }
 
@@ -59,7 +59,7 @@ int checkArgs(int argc, char *argv[]) {
     }
 
     // txt file 1
-    int fileStatus = checkFile(&argv[1], false);
+    int fileStatus = checkFile(argv[1], false);
     if (fileStatus == 1) {
         printf("\nError. Ha ocurrido un error durante el procesamiento de los ficheros.\n");
         return 1;
@@ -69,7 +69,7 @@ int checkArgs(int argc, char *argv[]) {
     }
 
     // txt file 2
-    fileStatus = checkFile(&argv[2], false);
+    fileStatus = checkFile(argv[2], false);
     if (fileStatus == 1) {
         printf("\nError. Ha ocurrido un error durante el procesamiento de los ficheros.\n");
         return 1;
@@ -79,7 +79,7 @@ int checkArgs(int argc, char *argv[]) {
     }
 
     // txt file 3
-    fileStatus = checkFile(&argv[3], true);
+    fileStatus = checkFile(argv[3], true);
     if (fileStatus == 1) {
         printf("\nError. Ha ocurrido un error durante el procesamiento de los ficheros.\n");
         return 1;
@@ -89,7 +89,7 @@ int checkArgs(int argc, char *argv[]) {
     }
 
     // txt file 4
-    fileStatus = checkFile(&argv[4], true);
+    fileStatus = checkFile(argv[4], true);
     if (fileStatus == 1) {
         printf("\nError. Ha ocurrido un error durante el procesamiento de los ficheros.\n");
         return 1;

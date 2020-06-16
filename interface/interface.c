@@ -20,7 +20,10 @@ int readOption(int * option) {
 
     // Get user option
     char userInput[MAX_CHAR];
-    scanf("%s", (char *) &userInput);
+    for (int i = 0; i < MAX_CHAR; i++) {
+        userInput[i] = '\0';
+    }
+    fgets(userInput, MAX_CHAR, stdin);
 
     // check exit case
     if (strcmp(userInput, "exit") == 0) {
@@ -113,7 +116,8 @@ int racerData(Racer * racer) {
         char term;
         fflush(stdin);
         printf("\nDorsal? ");
-        if(scanf("%d%c", &num, &term) != 2 || term != '\n') { // check if its number
+        int totalScanf = scanf("%d%c", &num, &term);
+        if(totalScanf != 2 || term != '\n') { // check if its number
             printf("\nError, el dorsal tiene que ser un entero entre 1 y 99\n");
         } else {
             if (num >= 1 && num <= 99) {

@@ -34,6 +34,9 @@ void updateCarPlayer(Player * player, Championship * championship, int currentPi
         case 5:
             (*(*player).car).engine = &(*(*championship).warehouse).categories[currentCategory].pieces[currentPiece];
             break;
+        default:
+            printf("\nUpdateCarPlayer default\n");
+            break;
     }
 }
 

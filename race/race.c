@@ -114,7 +114,7 @@ void trafficLight() {
 int startRace(Championship * championship, Player * player) {
 
     // check if car its configured
-    if ((*(*(*player).car).engine).name == NULL) {
+    if (player->car->engine->name == NULL) {
         printf("\nAun no has configurado el coche\n");
         return 1;
     }
@@ -178,7 +178,7 @@ int startRace(Championship * championship, Player * player) {
 
     // get seconds players
     int * racersSeconds = racersSeconds = malloc(sizeof(int) * (*racersSeason).totalRacers);
-    int seasonSeconds = (*(*championship).season[currentSeason].gps).baseTime;
+    int seasonSeconds = (int) (*(*championship).season[currentSeason].gps).baseTime;
 
     for (int j = 0; j < (*racersSeason).totalRacers; ++j) {
         racersSeconds[j] = seasonSeconds + (*racersSeason).racer[j].speed + (*racersSeason).racer[j].acceleration + (*racersSeason).racer[j].consumption + (*racersSeason).racer[j].flexibility;
@@ -218,4 +218,26 @@ int startRace(Championship * championship, Player * player) {
 
         racersSeconds[k] = racersSeconds[k] - playerSkillTime;
     }
+
+    // race screen
+    int closeWindow = false;
+
+    clock_t begin;
+    double time_spent;
+    /* Mark beginning time */
+    begin = clock();
+
+    // user onclick keys
+    while(!closeWindow) {
+
+        if (LS_allegro_key_pressed(ALLEGRO_KEY_ENTER)) {
+            closeWindow = true;
+        }
+
+        for (int i = 0; i < (*racersSeason).totalRacers; ++i) {
+
+        }
+
+    }
+
 }
